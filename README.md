@@ -7,7 +7,7 @@ Sensible NeoVim configuration. Contains settings from [vim-sensible](https://git
 Run the following commands to install on your system,
 
     cd ~
-    git clone git://github.com/adibis/.vim.git
+    git clone git://github.com/adibis/.nvim.git
     ln -s ~/.nvim/nvimrc.vim ~/.nvimrc
 
 More stuff will be added as the NeoVim project matures.
