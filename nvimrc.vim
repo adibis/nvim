@@ -6,7 +6,7 @@ if has('syntax') && !exists('g:syntax_on')
 endif
 
 " Map the leader key to ,
-let mapleader=","
+let mapleader="\<SPACE>"
 
 " General {
   set nocompatible                    " Disable vi compatibility.
@@ -176,4 +176,21 @@ let mapleader=","
   endif
 " }
 
-" vim:set ft=vim et sw=2:
+" Keybindings {
+  " Open file
+  " nnoremap <Leader>o :CtrlP<CR>
+  " Save file
+  nnoremap <Leader>w :w<CR>
+  "Copy and paste from system clipboard
+  vmap <Leader>y "+y
+  vmap <Leader>d "+d
+  nmap <Leader>p "+p
+  nmap <Leader>P "+P
+  vmap <Leader>p "+p
+  vmap <Leader>P "+P
+  "Enter to go to EOF and backspace to go to start
+  nnoremap <CR> G
+  nnoremap <BS> gg
+" }
+
+" vim:set ft=vim sw=2 ts=2:
