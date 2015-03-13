@@ -1,3 +1,9 @@
+call plug#begin('~/.nvim/plugged')
+
+Plug 'kien/ctrlp.vim'
+
+call plug#end()
+
 if has('autocmd')
   filetype plugin indent on
 endif
@@ -199,7 +205,7 @@ let mapleader="\<SPACE>"
 
 " Keybindings {
   " Open file
-  " nnoremap <Leader>o :CtrlP<CR>
+  nnoremap <Leader>o :CtrlP<CR>
   " Save file
   nnoremap <Leader>w :w<CR>
   "Copy and paste from system clipboard
