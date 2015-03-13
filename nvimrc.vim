@@ -79,6 +79,11 @@ let mapleader="\<SPACE>"
     set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
   endif
   set list                " Show problematic characters.
+
+  " Also highlight all tabs and trailing whitespace characters.
+  highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+  match ExtraWhitespace /\s\+$\|\t/
+
 " }
 
 " Configuration {
@@ -93,6 +98,9 @@ let mapleader="\<SPACE>"
   set isfname-=:
   set isfname-==
   set isfname-=+
+
+  " Map ; to :
+  nnoremap ; :
 
   if &history < 1000
     set history=1000      " Number of lines in command history.
@@ -137,6 +145,19 @@ let mapleader="\<SPACE>"
       normal `z
     endif
   endfunction
+
+  " Diff options
+  set diffopt+=iwhite
+
+  "Enter to go to EOF and backspace to go to start
+  nnoremap <CR> G
+  nnoremap <BS> gg
+  " Stop cursor from jumping over wrapped lines
+  nnoremap j gj
+  nnoremap k gk
+  " Make HOME and END behave like shell
+  inoremap <C-E> <End>
+  inoremap <C-A> <Home>
 " }
 
 " GUI Options {
@@ -188,9 +209,6 @@ let mapleader="\<SPACE>"
   nmap <Leader>P "+P
   vmap <Leader>p "+p
   vmap <Leader>P "+P
-  "Enter to go to EOF and backspace to go to start
-  nnoremap <CR> G
-  nnoremap <BS> gg
 " }
 
 " vim:set ft=vim sw=2 ts=2:
