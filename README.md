@@ -1,4 +1,4 @@
-# NeoVim Configuration Directory
+# Neovim Configuration Directory
 
 Sensible NeoVim configuration. Contains settings from [vim-sensible](https://github.com/tpope/vim-sensible) along with my own changes.
 
@@ -9,5 +9,6 @@ Run the following commands to install on your system,
     cd ~
     git clone git://github.com/adibis/.nvim.git
     ln -s ~/.nvim/nvimrc.vim ~/.nvimrc
+    nvim +PlugInstall +qall
 
-More stuff will be added as the NeoVim project matures.
+More stuff will be added as the Neovim project matures.

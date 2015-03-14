@@ -1,6 +1,7 @@
 call plug#begin('~/.nvim/plugged')
 
 Plug 'kien/ctrlp.vim'
+Plug 'bling/vim-airline'
 
 call plug#end()
 
@@ -204,8 +205,6 @@ let mapleader="\<SPACE>"
 " }
 
 " Keybindings {
-  " Open file
-  nnoremap <Leader>o :CtrlP<CR>
   " Save file
   nnoremap <Leader>w :w<CR>
   "Copy and paste from system clipboard
@@ -215,6 +214,25 @@ let mapleader="\<SPACE>"
   nmap <Leader>P "+P
   vmap <Leader>p "+p
   vmap <Leader>P "+P
+" }
+
+" Plugin Settings {
+  " Airline {
+    let g:airline#extensions#tabline#enabled = 2
+    let g:airline#extensions#tabline#fnamemod = ':t'
+    let g:airline#extensions#tabline#left_sep = ' '
+    let g:airline#extensions#tabline#left_alt_sep = '|'
+    let g:airline#extensions#tabline#right_sep = ' '
+    let g:airline#extensions#tabline#right_alt_sep = '|'
+    let g:airline_left_sep = ' '
+    let g:airline_left_alt_sep = '|'
+    let g:airline_right_sep = ' '
+    let g:airline_right_alt_sep = '|'
+  " }
+  " CtrlP {
+    " Open file
+    nnoremap <Leader>o :CtrlP<CR>
+  " }
 " }
 
 " vim:set ft=vim sw=2 ts=2:
