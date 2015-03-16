@@ -16,7 +16,6 @@ endif
 let mapleader="\<SPACE>"
 
 " General {
-  set nocompatible                    " Disable vi compatibility.
   set backspace=indent,eol,start      " Allow backspace over everything in insert mode.
   set complete-=i
   set smarttab
@@ -74,7 +73,7 @@ let mapleader="\<SPACE>"
     set sidescrolloff=5   " Show next 5 columns while side-scrolling.
   endif
   set display+=lastline
-  set nostartofline       " Do not jump to first character with page commands,
+  set nostartofline       " Do not jump to first character with page commands.
 
   if &encoding ==# 'latin1' && has('gui_running')
     set encoding=utf-8
