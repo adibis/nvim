@@ -5,6 +5,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'kien/ctrlp.vim'
   " airline is a better status line and a tab-bar for nvim.
   Plug 'bling/vim-airline'
+  " gruvbox colorscheme. Seems to work the best for me.
+  Plug 'morhetz/gruvbox'
 " }
 
 call plug#end()
@@ -20,8 +22,6 @@ endif
 let mapleader="\<SPACE>"
 
 " General {
-  set backspace=indent,eol,start      " Allow backspace over everything in insert mode.
-  set complete-=i
   set smarttab
 
   set noautoindent        " I indent my code myself.
@@ -35,10 +35,8 @@ let mapleader="\<SPACE>"
 " }
 
 " Search {
-  set hlsearch            " Highlight search results.
   set ignorecase          " Make searching case insensitive
   set smartcase           " ... unless the query has capital letters.
-  set incsearch           " Incremental search.
   set gdefault            " Use 'g' flag by default with :s/foo/bar/.
   set magic               " Use 'magic' patterns (extended regular expressions).
 
@@ -79,10 +77,6 @@ let mapleader="\<SPACE>"
   set display+=lastline
   set nostartofline       " Do not jump to first character with page commands.
 
-  if &encoding ==# 'latin1' && has('gui_running')
-    set encoding=utf-8
-  endif
-
   " Tell Vim which characters to show for expanded TABs,
   " trailing whitespace, and end-of-lines. VERY useful!
   if &listchars ==# 'eol:$'
@@ -101,7 +95,6 @@ let mapleader="\<SPACE>"
     setglobal tags-=./tags tags^=./tags;
   endif
 
-  set autoread            " If file updates, load automatically.
   set autochdir           " Switch to current file's parent directory.
 
   " Remove special characters for filename
@@ -170,14 +163,11 @@ let mapleader="\<SPACE>"
   inoremap <C-A> <Home>
 " }
 
-" GUI Options {
-  set guioptions-=m " Removes top menubar
-  set guioptions-=T " Removes top toolbar
-  set guioptions-=r " Removes right hand scroll bar
-  set go-=L " Removes left hand scroll bar
+" UI Options {
 
-  "Toggle menubar
-  nnoremap <leader>m :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
+  " Colorscheme options.
+  set bg=dark
+  colorscheme gruvbox
 
   " Relative numbering
   function! NumberToggle()
@@ -194,17 +184,17 @@ let mapleader="\<SPACE>"
 
   " Sets a status line. If in a Git repository, shows the current branch.
   " Also shows the current file name, line and column number.
-  if has('statusline')
-      set laststatus=2
+  "if has('statusline')
+  "    set laststatus=2
 
-      " Broken down into easily includeable segments
-      set statusline=%<%f\                     " Filename
-      set statusline+=%w%h%m%r                 " Options
-      "set statusline+=%{fugitive#statusline()} " Git Hotness
-      set statusline+=\ [%{&ff}/%Y]            " Filetype
-      set statusline+=\ [%{getcwd()}]          " Current dir
-      set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-  endif
+  "    " Broken down into easily includeable segments
+  "    set statusline=%<%f\                     " Filename
+  "    set statusline+=%w%h%m%r                 " Options
+  "    "set statusline+=%{fugitive#statusline()} " Git Hotness
+  "    set statusline+=\ [%{&ff}/%Y]            " Filetype
+  "    set statusline+=\ [%{getcwd()}]          " Current dir
+  "    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+  "endif
 " }
 
 " Keybindings {
@@ -219,6 +209,12 @@ let mapleader="\<SPACE>"
   vmap <Leader>P "+P
 " }
 
+
+" Experimental {
+  " Search and Replace
+  nmap <Leader>s :%s//g<Left><Left>
+" }
+
 " Plugin Settings {
   " Airline {
     let g:airline#extensions#tabline#enabled = 2
@@ -231,7 +227,7 @@ let mapleader="\<SPACE>"
     let g:airline_left_alt_sep = '|'
     let g:airline_right_sep = ' '
     let g:airline_right_alt_sep = '|'
-    let g:airline_theme= 'serene'
+    let g:airline_theme= 'gruvbox'
   " }
   " CtrlP {
     " Open file menu
