@@ -207,6 +207,10 @@ let mapleader="\<SPACE>"
   nmap <Leader>P "+P
   vmap <Leader>p "+p
   vmap <Leader>P "+P
+
+  " Move between buffers
+  nmap <Leader>l :bnext<CR>
+  nmap <Leader>h :bprevious<CR>
 " }
 
 
