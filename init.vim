@@ -158,7 +158,7 @@ let mapleader="\<SPACE>"
 " Keybindings {
   " Save file
   nnoremap <Leader>w :w<CR>
-  "Copy and paste from system clipboard
+  " Copy and paste from system clipboard (Might require xsel/xclip install)
   vmap <Leader>y "+y
   vmap <Leader>d "+d
   nmap <Leader>p "+p
