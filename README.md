@@ -1,6 +1,4 @@
-# neovim Configuration Directory
-
-Sensible neovim configuration. Contains settings from [vim-sensible](https://github.com/tpope/vim-sensible) along with my own changes.
+# neovim
 
 ## Installation and Upgrades
 

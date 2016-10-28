@@ -17,13 +17,9 @@ call plug#end()
 let mapleader="\<SPACE>"
 
 " General {
-  set smarttab
-
   set noautoindent        " I indent my code myself.
   set nocindent           " I indent my code myself.
   "set smartindent        " Or I let the smartindent take care of it.
-
-  set nrformats-=octal
 
   set ttimeout
   set ttimeoutlen=100
@@ -100,9 +96,6 @@ let mapleader="\<SPACE>"
   " Map ; to :
   nnoremap ; :
 
-  if &history < 1000
-    set history=1000      " Number of lines in command history.
-  endif
   if &tabpagemax < 50
     set tabpagemax=50     " Maximum tab pages.
   endif
@@ -112,7 +105,6 @@ let mapleader="\<SPACE>"
   endif
 
   " Path/file expansion in colon-mode.
-  set wildmenu
   set wildmode=list:longest
   set wildchar=<TAB>
 
