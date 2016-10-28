@@ -7,6 +7,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'bling/vim-airline'
   " gruvbox colorscheme. Seems to work the best for me.
   Plug 'morhetz/gruvbox'
+  " neomake is a code linting tool that runs in the background.
+  Plug 'neomake/neomake'
 " }
 
 call plug#end()
@@ -241,6 +243,18 @@ let mapleader="\<SPACE>"
     nnoremap <Leader>b :CtrlPBuffer<CR>
     " Open most recently used files
     nnoremap <Leader>f :CtrlPMRUFiles<CR>
+  " }
+  " neomake {
+    autocmd! BufWritePost * Neomake
+    nnoremap <Leader>l :lopen<CR>
+  " }
+  " neomake {
+    let g:netrw_liststyle=3 " tree (change to 0 for thin)
+    let g:netrw_banner=0    " no banner
+    let g:netrw_altv=1      " open files on right
+    let g:netrw_winsize=80  " only use 20% screen for netrw
+    " FIXME: Preview opens to left and is very narrow
+    let g:netrw_preview=1   " open previews vertically
   " }
 " }
 
