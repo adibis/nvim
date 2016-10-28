@@ -13,13 +13,6 @@ call plug#begin('~/.config/nvim/plugged')
 
 call plug#end()
 
-if has('autocmd')
-  filetype plugin indent on
-endif
-if has('syntax') && !exists('g:syntax_on')
-  syntax enable
-endif
-
 " Map the leader key to ,
 let mapleader="\<SPACE>"
 
