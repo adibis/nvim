@@ -13,24 +13,13 @@ call plug#begin('~/.config/nvim/plugged')
 
 call plug#end()
 
-if has('autocmd')
-  filetype plugin indent on
-endif
-if has('syntax') && !exists('g:syntax_on')
-  syntax enable
-endif
-
 " Map the leader key to ,
 let mapleader="\<SPACE>"
 
 " General {
-  set smarttab
-
   set noautoindent        " I indent my code myself.
   set nocindent           " I indent my code myself.
   "set smartindent        " Or I let the smartindent take care of it.
-
-  set nrformats-=octal
 
   set ttimeout
   set ttimeoutlen=100
@@ -76,7 +65,6 @@ let mapleader="\<SPACE>"
   if !&sidescrolloff
     set sidescrolloff=5   " Show next 5 columns while side-scrolling.
   endif
-  set display+=lastline
   set nostartofline       " Do not jump to first character with page commands.
 
   " Tell Vim which characters to show for expanded TABs,
@@ -93,10 +81,6 @@ let mapleader="\<SPACE>"
 " }
 
 " Configuration {
-  if has('path_extra')
-    setglobal tags-=./tags tags^=./tags;
-  endif
-
   set autochdir           " Switch to current file's parent directory.
 
   " Remove special characters for filename
@@ -107,26 +91,13 @@ let mapleader="\<SPACE>"
   " Map ; to :
   nnoremap ; :
 
-  if &history < 1000
-    set history=1000      " Number of lines in command history.
-  endif
-  if &tabpagemax < 50
-    set tabpagemax=50     " Maximum tab pages.
-  endif
-
   if &undolevels < 200
     set undolevels=200    " Number of undo levels.
   endif
 
   " Path/file expansion in colon-mode.
-  set wildmenu
   set wildmode=list:longest
   set wildchar=<TAB>
-
-  if !empty(&viminfo)
-    set viminfo^=!        " Write a viminfo file with registers.
-  endif
-  set sessionoptions-=options
 
   " Allow color schemes to do bright colors without forcing bold.
   if &t_Co == 8 && $TERM !~# '^linux'
@@ -166,7 +137,6 @@ let mapleader="\<SPACE>"
 " }
 
 " UI Options {
-
   " Colorscheme options.
   set bg=dark
   colorscheme gruvbox
@@ -183,26 +153,12 @@ let mapleader="\<SPACE>"
 
   " Toggle between normal and relative numbering.
   nnoremap <leader>r :call NumberToggle()<cr>
-
-  " Sets a status line. If in a Git repository, shows the current branch.
-  " Also shows the current file name, line and column number.
-  "if has('statusline')
-  "    set laststatus=2
-
-  "    " Broken down into easily includeable segments
-  "    set statusline=%<%f\                     " Filename
-  "    set statusline+=%w%h%m%r                 " Options
-  "    "set statusline+=%{fugitive#statusline()} " Git Hotness
-  "    set statusline+=\ [%{&ff}/%Y]            " Filetype
-  "    set statusline+=\ [%{getcwd()}]          " Current dir
-  "    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-  "endif
 " }
 
 " Keybindings {
   " Save file
   nnoremap <Leader>w :w<CR>
-  "Copy and paste from system clipboard
+  " Copy and paste from system clipboard (Might require xsel/xclip install)
   vmap <Leader>y "+y
   vmap <Leader>d "+d
   nmap <Leader>p "+p
