@@ -4,9 +4,9 @@ Sensible NeoVim configuration. Contains settings from [vim-sensible](https://git
 
 ## Installing On Your Own System
 
-Run the following commands to install on your system,
+Run the following commands to install:
 
-    cd ~
+    cd
     git clone git://github.com/adibis/nvim.git ~/.config/nvim
     nvim +PlugInstall +qall
 
