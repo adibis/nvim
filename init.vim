@@ -73,11 +73,6 @@ let mapleader="\<SPACE>"
     set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
   endif
   set list                " Show problematic characters.
-
-  " Also highlight all tabs and trailing whitespace characters.
-  highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-  match ExtraWhitespace /\s\+$\|\t/
-
 " }
 
 " Configuration {
@@ -104,23 +99,15 @@ let mapleader="\<SPACE>"
     set t_Co=16
   endif
 
-  " Remove trailing spaces before saving text files
-  " http://vim.wikia.com/wiki/Remove_trailing_spaces
-  autocmd BufWritePre * :call StripTrailingWhitespace()
-  function! StripTrailingWhitespace()
-    if !&binary && &filetype != 'diff'
-      normal mz
-      normal Hmy
-      if &filetype == 'mail'
-  " Preserve space after e-mail signature separator
-        %s/\(^--\)\@<!\s\+$//e
-      else
-        %s/\s\+$//e
-      endif
-      normal 'yz<Enter>
-      normal `z
-    endif
+  " Remove trailing spaces.
+  function! TrimWhitespace()
+    let l:save = winsaveview()
+    %s/\s\+$//e
+    call winrestview(l:save)
   endfunction
+  " FIXME: Do not call this on makefile and sv files.
+  autocmd BufWritePre * call TrimWhitespace()
+  nnoremap <leader>W :call TrimWhitespace()<CR>
 
   " Diff options
   set diffopt+=iwhite
@@ -141,6 +128,10 @@ let mapleader="\<SPACE>"
   set bg=dark
   colorscheme gruvbox
 
+  " Also highlight all tabs and trailing whitespace characters.
+  highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+  match ExtraWhitespace /\s\+$\|\t/
+
   " Relative numbering
   function! NumberToggle()
     if(&relativenumber == 1)
@@ -158,6 +149,7 @@ let mapleader="\<SPACE>"
 " Keybindings {
   " Save file
   nnoremap <Leader>w :w<CR>
+
   " Copy and paste from system clipboard (Might require xsel/xclip install)
   vmap <Leader>y "+y
   vmap <Leader>d "+d
