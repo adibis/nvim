@@ -44,3 +44,4 @@ bower_components
 
 # .nvim specific
 plugged
+autoload/plug.vim.old
