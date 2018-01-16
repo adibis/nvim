@@ -79,7 +79,6 @@ let mapleader="\<SPACE>"
 
     " Path/file expansion in colon-mode.
     set wildmode=list:longest
-    set wildchar=<TAB>
 
     " Allow color schemes to do bright colors without forcing bold.
     if &t_Co == 8 && $TERM !~# '^linux'
