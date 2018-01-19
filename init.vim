@@ -4,7 +4,7 @@ call plug#begin('~/.config/nvim/plugged')
     " ctrl-p is a fuzzy file finder.
     Plug 'kien/ctrlp.vim'
     " airline is a better status line and a tab-bar for nvim.
-    Plug 'bling/vim-airline'
+    Plug 'itchyny/lightline.vim'
     " gruvbox colorscheme. Seems to work the best for me.
     Plug 'morhetz/gruvbox'
     " neomake is a code linting tool that runs in the background.
@@ -147,6 +147,8 @@ let mapleader="\<SPACE>"
     " Move between buffers
     nmap <Leader>l :bnext<CR>
     nmap <Leader>h :bprevious<CR>
+    nmap <Leader>k :tabnext<CR>
+    nmap <Leader>j :tabprevious<CR>
 " }
 
 
@@ -156,19 +158,43 @@ let mapleader="\<SPACE>"
 " }
 
 " Plugin Settings {
-    " Airline {
-        let g:airline#extensions#tabline#enabled = 1
-        let g:airline#extensions#tabline#buffer_idx_mode = 1
-        let g:airline#extensions#tabline#fnamemod = ':t'
-        let g:airline#extensions#tabline#left_sep = ''
-        let g:airline#extensions#tabline#left_alt_sep = ''
-        let g:airline#extensions#tabline#right_sep = ''
-        let g:airline#extensions#tabline#right_alt_sep = ''
-        let g:airline_left_sep = ''
-        let g:airline_left_alt_sep = ''
-        let g:airline_right_sep = ''
-        let g:airline_right_alt_sep = ''
-        let g:airline_theme= 'gruvbox'
+    " neomake {
+        let g:neomake_warning_sign={'text': '◆'}
+        let g:neomake_error_sign={'text': '✗'}
+        autocmd! BufWritePost * Neomake
+        nnoremap <Leader>n :lopen<CR>
+    " }
+    " Lightline {
+        let g:lightline = {
+        \ 'colorscheme': 'gruvbox',
+        \ 'active': {
+        \   'left': [['mode', 'paste'], ['filename', 'modified']],
+        \   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors']]
+        \ },
+        \ 'component_expand': {
+        \   'linter_warnings': 'LightlineLinterWarnings',
+        \   'linter_errors': 'LightlineLinterErrors'
+        \ },
+        \ 'component_type': {
+        \   'readonly': 'error',
+        \   'linter_warnings': 'warning',
+        \   'linter_errors': 'error'
+        \ },
+        \ }
+        function! LightlineLinterWarnings() abort
+            let l:counts = neomake#statusline#LoclistCounts()
+            let l:warnings = get(l:counts, 'W', 0)
+            return l:warnings == 0 ? '' : printf('%d ◆', l:warnings)
+        endfunction
+
+        function! LightlineLinterErrors() abort
+            let l:counts = neomake#statusline#LoclistCounts()
+            let l:errors = get(l:counts, 'E', 0)
+            return l:errors == 0 ? '' : printf('%d ✗', l:errors)
+        endfunction
+
+        " Ensure lightline updates after neomake is done.
+        autocmd! User NeomakeFinished call lightline#update()
     " }
     " CtrlP {
         " Open file menu
@@ -177,10 +203,6 @@ let mapleader="\<SPACE>"
         nnoremap <Leader>b :CtrlPBuffer<CR>
         " Open most recently used files
         nnoremap <Leader>f :CtrlPMRUFiles<CR>
-    " }
-    " neomake {
-        autocmd! BufWritePost * Neomake
-        nnoremap <Leader>l :lopen<CR>
     " }
     " netrw {
         let g:netrw_liststyle=3 " tree (change to 0 for thin)
