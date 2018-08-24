@@ -3,7 +3,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Plugins {
     " ctrl-p is a fuzzy file finder.
     Plug 'kien/ctrlp.vim'
-    " airline is a better status line and a tab-bar for nvim.
+    " lightline is a status line for nvim.
     Plug 'itchyny/lightline.vim'
     " gruvbox colorscheme. Seems to work the best for me.
     Plug 'morhetz/gruvbox'
@@ -149,6 +149,15 @@ let mapleader="\<SPACE>"
     nmap <Leader>h :bprevious<CR>
     nmap <Leader>k :tabnext<CR>
     nmap <Leader>j :tabprevious<CR>
+    nmap <tab> <C-w>w
+
+    " Manage split sizes
+    map <leader>ww <C-w>_
+    map <leader>w\ <C-w>|
+    map <leader>we <C-w>=
+    map <leader>w- <C-w>-
+    map <leader>w= <C-w>+
+
 " }
 
 
