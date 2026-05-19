@@ -73,12 +73,6 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 vim.lsp.config("*", {
   capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    local ok, diag = pcall(require, "rj.extras.workspace-diagnostic")
-    if ok then
-      diag.populate_workspace_diagnostics(client, bufnr)
-    end
-  end,
 })
 -- }}}
 
@@ -125,12 +119,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       return vim.tbl_extend("force", opts, { desc = desc }, others or {})
     end
     keymap("n", "gd", lsp.buf.definition, opt("Go to definition"))
-    keymap("n", "gD", function()
-      local ok, diag = pcall(require, "rj.extras.definition")
-      if ok then
-        diag.get_def()
-      end
-    end, opt("Get the definition in a float"))
+    keymap("n", "gD", lsp.buf.declaration, opt("Go to declaration"))
     keymap("n", "gi", function() lsp.buf.implementation({ border = "single" })  end, opt("Go to implementation"))
     keymap("n", "gr", lsp.buf.references, opt("Show References"))
     keymap("n", "gl", vim.diagnostic.open_float, opt("Open diagnostic in float"))
@@ -149,15 +138,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     keymap("n", "<Leader>ls", lsp.buf.document_symbol, opt("Doument Symbols"))
 
     -- diagnostic mappings
-    keymap("n", "<Leader>dD", function()
-      local ok, diag = pcall(require, "rj.extras.workspace-diagnostic")
-      if ok then
-        for _, cur_client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
-          diag.populate_workspace_diagnostics(cur_client, 0)
-        end
-        vim.notify("INFO: Diagnostic populated")
-      end
-    end, opt("Popluate diagnostic for the whole workspace"))
     keymap("n", "<Leader>dn", function() vim.diagnostic.jump({ count = 1, float = true }) end, opt("Next Diagnostic"))
     keymap("n", "<Leader>dp", function() vim.diagnostic.jump({ count =-1, float = true }) end, opt("Prev Diagnostic"))
     keymap("n", "<Leader>dq", vim.diagnostic.setloclist, opt("Set LocList"))
@@ -218,10 +198,6 @@ vim.lsp.config.basedpyright = {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "python",
   callback = function()
-    local ok, venv = pcall(require, "rj.extras.venv")
-    if ok then
-      venv.setup()
-    end
     local root = vim.fs.root(0, {
       "pyproject.toml",
       "setup.py",

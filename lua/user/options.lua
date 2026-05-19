@@ -1,4 +1,3 @@
-local fn = vim.fn
 local opt = vim.opt
 
 -----------------------------------------------------------
@@ -22,11 +21,10 @@ opt.smartcase = true        -- Ignore lowercase for the whole pattern
 opt.gdefault = true         -- Use 'g' by default when searching
 opt.linebreak = true        -- Wrap on word boundary
 opt.termguicolors = true    -- Enable 24-bit RGB colors
-opt.laststatus= 2           -- Set local statusline
+opt.laststatus = 2          -- Set local statusline
 opt.signcolumn = 'yes'      -- Set signcolumn on by default
 opt.scrolloff = 3           -- Show next 3 lines when scrolling
 opt.sidescrolloff = 5       -- Show 5 columns when scrolling horizontally
-opt.startofline = false     -- Don't jump to start of line when scrolling
 opt.wildmode = "list:longest"
 opt.diffopt:append('iwhite')-- Ignore whitespace in diff
 
@@ -38,7 +36,7 @@ opt.expandtab = true        -- Use spaces instead of tabs
 opt.shiftwidth = 2          -- Shift 2 spaces when tab
 opt.tabstop = 2             -- 1 tab == 2 spaces
 opt.smartindent = true      -- Autoindent new lines
-opt.colorcolumn = '100'     -- 100 characters max per line so mark it
+opt.colorcolumn = '100'     -- Mark 100-character column
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = "#623456" })
 opt.joinspaces = false      -- Prevents two spaces on 'J'oin after punctuation
 
